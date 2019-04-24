@@ -59,13 +59,10 @@ class LList {
 
     findPre(item) {
         let currentNode = this.head
-        while (currentNode.next != null) {
-            if (currentNode.element === item) {
-                return currentNode
-            }
+        while (currentNode.next != null && currentNode.next.element != item) {
             currentNode = currentNode.next
         }
-        return null
+        return currentNode
     }
 }
 
