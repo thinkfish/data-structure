@@ -75,19 +75,25 @@ llist = Llist(headElement)
 llist.insert("Conway", headElement)
 llist.insert("Russellville", "Conway")
 llist.insert("Alma","Russellville")
-llist.display()
-llist.remove('Conway')
-print llist.length()
+# llist.display()
+# llist.remove('Conway')
+# print llist.length()
 
 # 常见算法题，反转一个单链表
-def reverseLList(list):
-    print list.__dict__
-    cNode = list.head
-    while cNode.next != None:
-        cNode.next = cNode.next.next
-        cNode.next.next = cNode.next
-        cNode = cNode.next
+def reverseLList(head):
+    if head == None or head.next == None:
+        return head
+    cur = head
+    temp = None
+    newHead = None
+    while cur:
+        temp = cur.next
+        cur.next = newHead
+        newHead = cur
+        cur = temp
+    return newHead
 
-reverseLList(llist)
-llist.display()
+
+reverseLList01(llist.head)
+print 'list reverse after=>', llist.__dict__
 
