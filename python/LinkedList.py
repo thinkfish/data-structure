@@ -48,8 +48,6 @@ class Llist:
         current = self.find(item)
         newNode.next = current.next
         current.next = newNode
-        print current
-        print newNode
 
     def remove(self,item):
         preNode = self.findPrevious(item)
@@ -84,6 +82,11 @@ print llist.length()
 # 常见算法题，反转一个单链表
 def reverseLList(list):
     print list.__dict__
+    cNode = list.head
+    while cNode.next != None:
+        cNode.next = cNode.next.next
+        cNode.next.next = cNode.next
+        cNode = cNode.next
 
 reverseLList(llist)
 llist.display()
