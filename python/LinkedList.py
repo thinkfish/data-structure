@@ -21,6 +21,7 @@ class Llist:
     def __init__(self,headElement):
         '''初始化头节点'''
         self.head = Node(headElement)
+        self.length = 1
 
     def length(self):
         len = 1
@@ -48,6 +49,7 @@ class Llist:
         current = self.find(item)
         newNode.next = current.next
         current.next = newNode
+        self.length += 1
 
     def remove(self,item):
         preNode = self.findPrevious(item)
