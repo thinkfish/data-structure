@@ -19,17 +19,29 @@ class DoublyLinkedList:
         while currentNode.next != None and currentNode.element != item:
             currentNode = currentNode.next
         return currentNode
-
+        
     def insert(self, newElement, item):
+        currentNode = self.find(item)
+        newNode = Node(newElement)
+        newNode.previous = currentNode
+        newNode.next = currentNode.next
+        currentNode.next = newNode
         self.length += 1
         pass
 
     def remove(self, item):
+        currentNode = self.find(item)
+        preNode = currentNode.previous
+        preNode.next = currentNode.next
+        currentNode.next.previous = preNode
         self.length -= 1
         pass
 
     def display(self):
-        pass
+        currentNode = self.head
+        while currentNode.next != None:
+            print currentNode
+            currentNode = currentNode.next
     
     def findLast(self):
         currentNode = self.head
