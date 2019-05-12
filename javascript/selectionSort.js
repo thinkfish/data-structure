@@ -1,7 +1,13 @@
+// 从第一个数开始，与其后的每个元素对比，拿到最小数，与起始位置互换
+// 时间复杂度为O(n^2)
 function selectionSort(arr) {
 
     let minIndex = 0
     let len = arr.length
+    if (!Array.isArray(arr)) {
+        throw Error('type error')
+        return
+    }
     if (!arr.length) {
         retrn
     } else {
