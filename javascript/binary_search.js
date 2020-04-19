@@ -7,7 +7,7 @@ function binary_search(arr, guess) {
         if (guess === arr[mid]) {
             return mid
         }
-        if (guess > arr[mid]) {
+        if (guess < arr[mid]) {
             high = mid - 1
         } else {
             low = mid + 1
