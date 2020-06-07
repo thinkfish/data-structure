@@ -48,3 +48,7 @@
         return arr
     }
  }
+
+let arr = [3, 5, 1, 2, 8, 6, 9]
+console.log(bubbleSort(arr))
+console.log(bubbleSortOptimize(arr))
