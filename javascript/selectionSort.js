@@ -3,13 +3,13 @@
 function selectionSort(arr) {
 
     let minIndex = 0
-    let len = arr.length
     if (!Array.isArray(arr)) {
         throw Error('type error')
         return
     }
-    if (!arr.length) {
-        retrn
+    let len = arr.length
+    if (!len) {
+        return []
     } else {
         for (let i = 0; i < len - 1; i++) {
             minIndex = i
