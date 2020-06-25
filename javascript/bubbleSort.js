@@ -9,9 +9,9 @@
      }
      const len = arr.length
 
-     if(!len){
-         return
-     }else{
+     if(len < 2){
+        return arr
+    }else{
          for(let i = 0 ; i < len; i++){
              for(let j = 0; j < len - 1; j++){
                  if(arr[j] < arr[j+1]){
@@ -35,8 +35,8 @@
     }
     const len = arr.length
 
-    if(!len){
-        return
+    if(len < 2){
+        return arr
     }else{
         for(let i = 0 ; i < len; i++){
             for(let j = 0; j < len - 1 - i; j++){

@@ -1,3 +1,4 @@
+import {less, swap} from './utils'
 // 插入排序
 function insertSort(arr){
     // 判断参数的有效性
@@ -19,6 +20,23 @@ function insertSort(arr){
     return arr
 }
 
+
+function insertSort01(arr){
+    //忽略参数类型及长度的校验等部分
+    const len = arr.length
+    for(let i = 0; i < len; i++){
+        for(let j = i; j > 0; j--){
+            if(less(arr[j],arr[j-1])){
+                swap(arr[j], arr[j-1])
+            }else{
+                break
+            }
+        }
+    }
+}
+
 // test
 let arr = [5,3,7,9,1,0,4]
 insertSort(arr)
+let arr01 = [5,3,7,9,1,0,4]
+insertSort01(arr01)

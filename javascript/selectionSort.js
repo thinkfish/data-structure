@@ -8,8 +8,8 @@ function selectionSort(arr) {
         return
     }
     let len = arr.length
-    if (!len) {
-        return []
+    if (len < 2) {
+        return arr
     } else {
         for (let i = 0; i < len - 1; i++) {
             minIndex = i
