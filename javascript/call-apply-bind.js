@@ -50,3 +50,45 @@ Function.prototype.newApply = function(context){
 }
 
 bar.newApply(foo)
+
+
+// instanceOf的实现
+// 沿着原型链一直往上找，直到找到null
+function myInstanceOf(left, right){
+    let proto = left.__proto__
+    let prototype = right.prototype
+    while(true){
+        if(proto === null){
+            return false
+        }
+        if(proto == prototype){
+            return true
+        }
+        proto = proto.__proto__
+    }
+}
+
+// eventEmitter
+class EventEmitter {
+    constructor(){
+        this.events = {}
+    }
+
+    on(name, cb){
+        if(this.events[name]){
+            this.events[name] = [cb]
+        }else{
+            this.events[name].push(cb)
+        }
+    }
+    emit(name, args){
+        if(this.events[name]){
+            this.events[name].forEach(fn => {
+                fn(this, ...args)
+            })
+        }
+    }
+    off(name, cb){
+        
+    }
+}
