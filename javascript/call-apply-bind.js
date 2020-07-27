@@ -89,6 +89,18 @@ class EventEmitter {
         }
     }
     off(name, cb){
-        
+        if(this.events[name]){
+            this.events[name] = this.events[name].filter(fn => {
+                return fn != cb
+            })
+        }
+    }
+    once(name, fn){
+        const onlyOnce = () => {
+            fn.apply(this, arguments)
+            this.off(name, onlyOnce)
+        }
+        this.on(name, onlyOnce)
+        return this
     }
 }
