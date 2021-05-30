@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head><title>fuck offer</title></head>
+    <body>
+        <div>fuck offer</div>
+        <div class="one"></div>
+        <div class="two"></div>
+        <style>
+            .one{
+                width: 100px;
+                height: 100px;
+                z-index: 5;
+                background: red;
+            }
+            .two{
+                width: 100px;
+                height: 100px;
+                position: relative;
+                top: -50px;
+                z-index: 3;
+                background: blue;
+            }
+        </style>
+        <div>
+            111
+            <p>222</p>
+            <span>333</span>
+        </div>
+        <div>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li> 
+            </ul>
+            <style>
+                ul{
+                    transform: rotateX(180deg)
+                }
+                li{
+                    transform: rotateX(180deg)
+                }
+            </style>
+        </div>
+        <style>
+            p{
+                background: red;
+                color: #000;
+                position: static;
+            }
+        </style>
+        <script>
+            // 周期执行某个函数n次
+            function repeat(fn,n,wait){
+                var timer = null
+                var context = this
+                return function(){
+                    const args = arguments
+                    timer = setInterval(function(){
+                            if(n){
+                                n--
+                                console.log('n=>',n)
+                                fn.apply(context,args)
+                            }else{
+                                    clearInterval(timer)
+                                    timer = null
+                                }
+                    },wait) 
+                }
+            }
+            
+            function isObject(val){
+                return Object.prototype.toString.call(val) === '[object Object]'
+            }
+
+            function deepClone(source, hash = WeakMap()){
+                if(!isObject(source)) return source
+                if(hash.hash(source)) return hash.get(source)
+
+                var target = Array.isArray(source) ? [] : {}
+                hash.set(srouce,target)
+
+                let symkeys = Object.prototype.getOwnPropertySymbols(source)
+                if(symkeys.length){
+                    symkeys.forEach(symkey =>{
+                        if(isObject(source[symkey])){
+                            target[symkey] = deepClone(source[symkey], hash)
+                        }else{
+                            target[symkey] = source[symkey]
+                        }
+                    })
+                }
+                for(var key in source){
+                    if(Object.prototype.hasOwnProperty(source, key)){
+                        if(isObject(srouce[key])){
+                            target[key] = deepClone(source[key], hash)
+                        }else{
+                            target[key] = source[key]
+                        }
+                    }
+                }
+                return target
+            }
+
+            function _new(Func, ...args){
+                let obj = Object.create(Func.prototype)
+                let result = Func.call(obj, ...args)
+                if((result!=null && typeof result === 'object') || typeof result === 'function'){
+                    return result
+                }
+                return obj
+            }
+
+            function A(){
+                return {
+                    a:1
+                }
+            }
+
+            var a = _new(A)
+            console.log('a=>',a.a)
+
+            function reverseUl(){
+                const oul = document.querySelector('ul')
+                const lis = oul.children
+                const nul = document.createDocumentFragment()
+                for(let i = lis.length - 1; i>=0; i--){
+                    nul.appendChild(lis[i])
+                }
+                oul.appendChild(nul)
+                body.document.removeChild(oul)
+                body.document.appendChild(nul)
+            }
+            // reverseUl()
+            // fibonacci
+            //循环
+            function fibonacci(n){
+                if(n<=2) return 1;
+                let front =0;
+                let end = 1;
+                for(let i = 1; i < n; i++){
+                    [front,end] = [end, front+end]
+                }
+                return end
+            }
+            console.log('fibonacci=>',fibonacci(10))
+            //递归
+            function fibonacci1(n){
+                if(n<=2) return 1;
+                return fibonacci1(n-1) + fibonacci1(n-2)
+            }
+            console.log('fibonacci1=>',fibonacci1(10))
+            //generator
+            function* fibonacci2(){
+                let front = 0;
+                let end = 1;
+                while(true){
+                    yield end;
+                    [front,end] = [end, front+end]
+                }
+            }
+            let gen = fibonacci2()
+            let current = 1;
+            let n = 10;
+            while(current <= n){
+                console.log(gen.next().value)
+                current ++
+            }
+        </script>
+    </body>
+</html>

@@ -104,3 +104,72 @@ class EventEmitter {
         return this
     }
 }
+
+
+
+function debouce(func, wait, immediate){
+
+    var timeout, result
+    
+    function debounced(){
+        var context = this
+        var args = arguments
+
+        if(timeout) clearTimeout(timeout)
+
+        if(immediate){
+            var callNow = !timeout
+            timeout = setTimeout(function(){
+                timeout = null
+            },wait)
+            if(callNow) result = func.apply(context, args)
+        }else{
+            timeout = setTimeout(function(){
+                result = func.apply(context, args)
+            }, wait)
+        }
+        return result
+    }
+
+    debounced.cancel = function(){
+        clearTimeout(timeout)
+        timeout = null
+    }
+
+    return debounced
+}
+
+
+function debounce(func, wait, immediate){
+
+    var timeout,result;
+    
+    var debounced = function(){
+        const context = this
+        const args = arguments
+
+        if(timeout) clearTimeout(timeout)
+
+        if(immediate){
+            let callNow = !timeout
+            timeout = setTimeout(function(){
+                // 此处会在等待时间之后将timeout清除，在这期间callNow一直为false，函数执行将被锁定
+                timeout = null
+            },wait)
+            if(callNow) result = func.apply(context, args)
+        }else{
+            timeout = setTimeout(function(){
+                result = func.apply(context,args)
+            },wait)
+        }
+        return result
+    }
+
+    debounced.cancel = function(){
+        clearTimeout(timeout)
+        timeout = null
+    }
+
+    return debounced
+
+}

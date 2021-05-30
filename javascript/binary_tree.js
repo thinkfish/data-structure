@@ -36,6 +36,11 @@ function preOrder(root){
     preOrder(root.right)
 }
 
+function treeNodesCount(root){
+    if(!root) return 0
+    return 1 + treeNodesCount(root.left) + treeNodesCount(root.right)
+}
+
 function inOrder(root){
     if(!root){
         return

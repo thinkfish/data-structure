@@ -34,8 +34,8 @@ class LList {
         let currentNode = this.find(item)
         newNode.next = currentNode.next
         currentNode.next = newNode
-        console.log('currentNode', currentNode)
-        console.log('newNode', newNode)
+        // console.log('currentNode', currentNode)
+        // console.log('newNode', newNode)
     }
 
     display() {
@@ -64,6 +64,20 @@ class LList {
         }
         return currentNode
     }
+
+    reverseList(){
+        let prev = null
+        let curr = this.head
+        console.log('curr',curr)
+        while(curr!=null){
+            let cnext = curr.next
+            console.log('cnext',cnext)
+            curr.next = prev === null?null:prev
+            prev = curr
+            curr=cnext
+        }
+        this.head = prev
+    }
 }
 
 // test
@@ -71,9 +85,51 @@ let list = new LList('head')
 list.insert('hello', 'head')
 list.insert('world', 'hello')
 list.insert('data', 'world')
-console.log('after insert some nodes')
+// console.log('after insert some nodes')
+list.reverseList()
+// console.log('after reverse lists')
 list.display()
-console.log('find', list.find('head'))
-list.remove('hello')
-console.log('after delete a node from list')
-list.display()
+// console.log('find', list.find('head'))
+// list.remove('hello')
+// console.log('after delete a node from list')
+// list.display()
+
+
+
+function reverseList(head){
+    let prev = null
+    let curr = head
+
+    while(head != null){
+        let cnext = curr.next
+        curr.next = prev === null ? null : prev
+        prev = curr
+        curr = cnext
+    }
+    return prev
+}
+
+// 第K大的数
+function selectionSort(arr,K){
+
+    if(!Array.isArray(arr)){
+        throw Error('type error,excepted Array')
+        return
+    }
+
+    let len = arr.length
+    if(len < 2) return arr
+    let minIndex = 0
+    for(let i = 0; i < K; i++){
+        minIndex = i
+        for(let j = i + 1; j < len; j++){
+            if(arr[minIndex] < arr[j]){
+                minIndex = j
+            }
+        }
+        if(i != minIndex){
+            [arr[i], arr[minIndex]]  = [arr[minIndex], arr[i]]
+        }
+    }
+    return arr
+}
